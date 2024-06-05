@@ -1,21 +1,39 @@
 $(document).ready(function(){
     // Formatar telefone
-    $('#telefone').on('focusout', () => {
-        var number = $(this).val().replace(/ /g, "");
-        if(number.length > 0 && number.length <= 12){
+    $('#telefone').on('input', () => {
+        /* está funcionando mas quero fazer do mesmo modo que o cep formata
+        obs.: mudar de input para focusout
+        var number = $("#telefone").val().replace(/ /g, "");
+        if(number.length > 0 && number.length < 11){
 
             //number = number.match(/.{2}/g).join(' ').match(/.{8}/g).join("-");
             number = "(" + number.slice(0,2) + ") " + number.slice(2,7) + "-" + number.slice(7,11)
             
-            $(this).val(number);
+            $("#telefone").val(number);
         }else{
             window.alert("insira um numero válido")
         }
+        */
+       
+        //recebe o valor do input
+        var number = $("#telefone").val().replace(/\D/g, '');
+        
+        // verifica a largura e formata mas para telefones não celular
+        if(number.length == 10){
+            number = number.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+        }
+
+        //verifica se o valor tem a largura valida e formata
+        if(number.length == 11){
+            number = number.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+
+        }
+        
+        $("#telefone").val(number);
+
     });
     
-    $('#telefone').on("focusout", ()=>{
-        //window.alert("");
-    });
+    
 
     // Formatar CEP e buscar endereço
     $('#cep').on('input', function(){
