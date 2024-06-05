@@ -1,11 +1,20 @@
 $(document).ready(function(){
     // Formatar telefone
-    $('#telefone').on('input', function(){
-        var number = $(this).val().replace(/\D/g, '');
-        if(number.length > 0){
-            number = number.match(/.{1,2}/g).join(' ').substr(0, 14);
+    $('#telefone').on('focusout', () => {
+        var number = $(this).val().replace(/ /g, "");
+        if(number.length > 0 && number.length <= 12){
+
+            //number = number.match(/.{2}/g).join(' ').match(/.{8}/g).join("-");
+            number = "(" + number.slice(0,2) + ") " + number.slice(2,7) + "-" + number.slice(7,11)
+            
+            $(this).val(number);
+        }else{
+            window.alert("insira um numero válido")
         }
-        $(this).val(number);
+    });
+    
+    $('#telefone').on("focusout", ()=>{
+        //window.alert("");
     });
 
     // Formatar CEP e buscar endereço
