@@ -14,7 +14,12 @@ $(document).ready(function(){
             window.alert("insira um numero válido")
         }
         */
-       
+
+        //limita o numero de caracteres
+        if(number.length > 11){
+            number = number.slice(0,11);
+        }
+
         //recebe o valor do input
         var number = $("#telefone").val().replace(/\D/g, '');
         
@@ -32,7 +37,65 @@ $(document).ready(function(){
         $("#telefone").val(number);
 
     });
-    
+
+    //formatação do Cns conforme entra com os valores
+    $('#cns').on('input', function(){
+
+        //pega o valor do insert
+        var cns = $("#cns").val().replace(/\D/g, '');
+
+        //verifica se não ultrapassou o limite e limita para 15 caracteres
+        if(cns.length > 15){
+            cns = cns.slice(0,15);
+        }
+
+        // formatacao entre quantidades especificas de caracteres e ordenado 
+        // do maior para o menor para evitar um buggar o outro aumentando o 
+        // tamanho quando insere os espaços
+        if(cns.length >= 12 && cns.length <= 15){
+            cns = cns.slice(0,3) + " " + cns.slice(3,7) + " " + cns.slice(7,11) + " " + cns.slice(11,15);
+           
+        }
+
+        if(cns.length > 7 && cns.length <= 10){
+            cns = cns.slice(0,3) + " " + cns.slice(3,7) + " " + cns.slice(7,11);
+            
+        }
+
+        if(cns.length >= 4 && cns.length <= 6){
+            cns = cns.slice(0,3) + " " + cns.slice(3,7);
+            
+        }
+        
+        //muda o valor do campo
+        $("#cns").val(cns);
+    });
+
+    // Formatar RG 
+    $('#rg').on('input', function(){
+        //pega o valor do insert
+        var rg = $(this).val().replace(/\D/g, '');
+
+        //limita numero de caracteres
+        if(number.length > 11){
+            number = number.slice(0,11);
+        }
+
+        //se for com 2 digitos no inicio formata: 00.000.000-00
+        if(rg.length == 10){
+            rg = rg.replace(/(\d{2})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            buscarEndereco(rg);
+        }
+        //se for com 3 digitos no inicio formata: 000.000.000-00
+        if(rg.length == 11){
+            rg = rg.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            buscarEndereco(rg);
+        }
+
+        //muda o valor do campo
+        $("#rg").val(rg);
+    });
+
     
 
     // Formatar CEP e buscar endereço
