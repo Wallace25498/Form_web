@@ -14,14 +14,14 @@ $(document).ready(function(){
             window.alert("insira um numero válido")
         }
         */
+        //recebe o valor do input
+        var number = $("#telefone").val().replace(/\D/g, '');
 
         //limita o numero de caracteres
         if(number.length > 11){
             number = number.slice(0,11);
         }
 
-        //recebe o valor do input
-        var number = $("#telefone").val().replace(/\D/g, '');
         
         // verifica a largura e formata mas para telefones não celular
         if(number.length == 10){
