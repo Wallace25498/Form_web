@@ -74,11 +74,11 @@ $(document).ready(function(){
     // Formatar RG 
     $('#rg').on('input', function(){
         //pega o valor do insert
-        var rg = $(this).val().replace(/\D/g, '');
+        var rg = $("#rg").val().replace(/\D/g, '');
 
         //limita numero de caracteres
-        if(number.length > 11){
-            number = number.slice(0,11);
+        if(rg.length > 11){
+            rg = rg.slice(0,11);
         }
 
         //se for com 2 digitos no inicio formata: 00.000.000-00
