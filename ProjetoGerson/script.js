@@ -1,12 +1,102 @@
 $(document).ready(function(){
     // Formatar telefone
-    $('#telefone').on('input', function(){
-        var number = $(this).val().replace(/\D/g, '');
-        if(number.length > 0){
-            number = number.match(/.{1,2}/g).join(' ').substr(0, 14);
+    $('#telefone').on('input', () => {
+        /* está funcionando mas quero fazer do mesmo modo que o cep formata
+        obs.: mudar de input para focusout
+        var number = $("#telefone").val().replace(/ /g, "");
+        if(number.length > 0 && number.length < 11){
+
+            //number = number.match(/.{2}/g).join(' ').match(/.{8}/g).join("-");
+            number = "(" + number.slice(0,2) + ") " + number.slice(2,7) + "-" + number.slice(7,11)
+            
+            $("#telefone").val(number);
+        }else{
+            window.alert("insira um numero válido")
         }
-        $(this).val(number);
+        */
+        //recebe o valor do input
+        var number = $("#telefone").val().replace(/\D/g, '');
+
+        //limita o numero de caracteres
+        if(number.length > 11){
+            number = number.slice(0,11);
+        }
+
+        
+        // verifica a largura e formata mas para telefones não celular
+        if(number.length == 10){
+            number = number.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+        }
+
+        //verifica se o valor tem a largura valida e formata
+        if(number.length == 11){
+            number = number.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+
+        }
+        
+        $("#telefone").val(number);
+
     });
+
+    //formatação do Cns conforme entra com os valores
+    $('#cns').on('input', function(){
+
+        //pega o valor do insert
+        var cns = $("#cns").val().replace(/\D/g, '');
+
+        //verifica se não ultrapassou o limite e limita para 15 caracteres
+        if(cns.length > 15){
+            cns = cns.slice(0,15);
+        }
+
+        // formatacao entre quantidades especificas de caracteres e ordenado 
+        // do maior para o menor para evitar um buggar o outro aumentando o 
+        // tamanho quando insere os espaços
+        if(cns.length >= 12 && cns.length <= 15){
+            cns = cns.slice(0,3) + " " + cns.slice(3,7) + " " + cns.slice(7,11) + " " + cns.slice(11,15);
+           
+        }
+
+        if(cns.length > 7 && cns.length <= 10){
+            cns = cns.slice(0,3) + " " + cns.slice(3,7) + " " + cns.slice(7,11);
+            
+        }
+
+        if(cns.length >= 4 && cns.length <= 6){
+            cns = cns.slice(0,3) + " " + cns.slice(3,7);
+            
+        }
+        
+        //muda o valor do campo
+        $("#cns").val(cns);
+    });
+
+    // Formatar RG 
+    $('#rg').on('input', function(){
+        //pega o valor do insert
+        var rg = $("#rg").val().replace(/\D/g, '');
+
+        //limita numero de caracteres
+        if(rg.length > 11){
+            rg = rg.slice(0,11);
+        }
+
+        //se for com 2 digitos no inicio formata: 00.000.000-00
+        if(rg.length == 10){
+            rg = rg.replace(/(\d{2})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            buscarEndereco(rg);
+        }
+        //se for com 3 digitos no inicio formata: 000.000.000-00
+        if(rg.length == 11){
+            rg = rg.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            buscarEndereco(rg);
+        }
+
+        //muda o valor do campo
+        $("#rg").val(rg);
+    });
+
+    
 
     // Formatar CEP e buscar endereço
     $('#cep').on('input', function(){
@@ -64,12 +154,28 @@ $(document).ready(function(){
 
     // Enviar formulário
     $('#cadastroForm').on('submit', function(event){
-        event.preventDefault();
-        // Aqui você pode adicionar a lógica para enviar os dados para o servidor
-        alert("Formulário enviado!");
-        // Por exemplo:
-        // $.post('recebe_dados.php', $(this).serialize(), function(response){
-        //     console.log(response);
-        // });
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        // Serializa os dados do formulário
+        var formData = $(this).serialize();
+
+        // Faz a requisição AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'putPacientes.php',
+            data: formData,
+            dataType: 'json',
+            success: function(response){
+                if(response.status === 'success') {
+                    alert(response.message);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(){
+                // Lógica para tratar erro na requisição
+                alert("Ocorreu um erro ao enviar o formulário. Tente novamente.");
+            }
+        });
     });
 });
