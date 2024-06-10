@@ -9,8 +9,9 @@ assim como solicitado pelo Gerson nosso professor
 
 ### 1. What (O que foi feito?)
 
-    Foi realizado uma pequeno sistema de caadastro onde tem seu formulario em html que utiliza da liguagem
-    php para fazer o envio dos dados ao banco MySQL e utiliza JavaScript para formatação e manipulação dos dados
+    Foi realizado uma pequeno sistema de caadastro onde tem seu formulario em html que 
+    utiliza da liguagem php para fazer o envio dos dados ao banco MySQL e utiliza JavaScript 
+    para formatação e manipulação dos dados
 
 ### 2. Why (Por que foi feito?)
 
