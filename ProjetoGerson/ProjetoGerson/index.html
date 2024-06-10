@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form id="cadastroForm" action="putPacientes.php" method="POST">
+            <div class="input-group">
+                <label for="paciente">Paciente:</label>
+                <input type="text" id="paciente" name="paciente" placeholder="Digite o nome do paciente" required maxlength="50">
+            </div>
+            <div class="input-group">
+                <label for="sexo">Sexo:</label><br>
+                <input type="radio" id="masculino" name="sexo" value="masculino"> Masculino<br>
+                <input type="radio" id="feminino" name="sexo" value="feminino"> Feminino<br>
+                <input type="radio" id="prefiroNaoResponder" name="sexo" value="prefiro_nao_responder"> Prefiro não responder<br>
+            </div>
+            <div class="input-group">
+                <label for="genero">Gênero:</label><br>
+                <input type="radio" id="masculino" name="genero" value="masculino"> Masculino<br>
+                <input type="radio" id="feminino" name="genero" value="feminino"> Feminino<br>
+                <input type="radio" id="agenero" name="genero" value="agenero"> Agênero<br>
+                <input type="radio" id="generoNeutro" name="genero" value="genero_neutro"> Gênero Neutro<br>
+                <input type="radio" id="generoFluido" name="genero" value="genero_fluido"> Gênero Fluido<br>
+                <input type="radio" id="demigenero" name="genero" value="demigenero"> Demigênero<br>
+                <input type="radio" id="bigenero" name="genero" value="bigenero"> Bigênero<br>
+                <input type="radio" id="pangenero" name="genero" value="pangenero"> Pangênero<br>
+                <input type="radio" id="transexual" name="genero" value="transexual"> Transexual<br>
+                <input type="radio" id="queer" name="genero" value="queer"> Queer<br>
+                <!-- Adicione outras opções de gênero conforme necessário -->
+            </div>
+            <div class="input-group">
+                <label for="rg">R.G.:</label>
+                <input type="text" id="rg" name="rg" placeholder="Digite o R.G. do paciente" required>
+            </div>
+            <div class="input-group">
+                <label for="cns">CNS:</label>
+                <input type="text" id="cns" name="cns" placeholder="Digite o Cartão SUS do paciente" required>
+            </div>
+            <div class="input-group">
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required>
+            </div>
+            <div class="input-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" placeholder="+55 (11) 99999-9999" required>
+            </div>
+            <div class="input-group">
+                <label for="nomeMae">Nome da Mãe:</label>
+                <input type="text" id="nomeMae" name="nomeMae" placeholder="Digite o nome da mãe" required maxlength="50">
+            </div>
+            <div class="input-group">
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+            </div>
+            <div class="input-group">
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" disabled>
+            </div>
+            <div class="input-group">
+                <label for="numero">Número:</label>
+                <input type="number" id="numero" name="numero" required>
+            </div>
+            <div class="input-group">
+                <label for="complemento">Complemento:</label>
+                <input type="text" id="complemento" name="complemento" required>
+            </div>
+            <div class="input-group">
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" name="bairro" disabled>
+            </div>
+            <div class="input-group">
+                <label for="cidade">Cidade/Município:</label>
+                <input type="text" id="cidade" name="cidade" disabled>
+            </div>
+            <div class="input-group">
+                <label for="estado">UF/Estado:</label>
+                <input type="text" id="estado" name="estado" disabled>
+            </div>
+            <div class="input-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="input-group">
+                <label for="doenca">Doença:</label>
+                <select id="doenca" name="doenca">
+                    <option value="nefrite">Nefrite</option>
+                    <option value="conjutivite">Conjutivite</option>
+                    <option value="renite">Renite</option>
+                    <option value="asma">Asma</option>
+                    <option value="tendinite">Tendinite</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button type="reset">Limpar</button>
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
